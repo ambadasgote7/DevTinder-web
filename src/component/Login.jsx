@@ -9,6 +9,7 @@ const Login = () => {
 
     const [emailId, setEmailId] = useState("ambadas@gmail.com");
     const [password, setPassword] = useState("Ambadas@123");
+    const [error, setError] = useState("");
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -21,7 +22,8 @@ const Login = () => {
             dispatch(addUser(res.data));
             return navigate('/');
         } catch (err) {
-            console.log(err);
+          setError(err?.response?.data || "Something went wrong");
+          console.log(err);
         }
     }
 
@@ -81,7 +83,12 @@ const Login = () => {
                             >
                                 Login
                             </button>
+                            <p className="text-red-500 flex justify-center mt-2">
+                              {typeof error === "string" ? error : JSON.stringify(error)}
+                            </p>
+
                         </div>
+
                         
                         {/* Divider: Grey Line with Light Text */}
                         <div className="divider text-gray-500">New to the stack?</div>

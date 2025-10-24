@@ -36,9 +36,9 @@ const Connections = () => {
         <h1 className="text-bold text-white text-3xl">Connections</h1>
 
         {connections.map((connection) => {
-            const {firstName, lastName, photoUrl, age, gender, about} = connection;
+            const {_id, firstName, lastName, photoUrl, age, gender, about} = connection;
             return (
-                <div className=" flex m-4 p-4 rounded-lg bg-base-300 w-1/2">
+                <div key={_id} className=" flex m-4 p-4 rounded-lg bg-base-300 w-1/2">
                    <div>
                     <img 
                     alt="" 
@@ -53,6 +53,7 @@ const Connections = () => {
                     { age && gender && <p>{age + " | " + gender}</p> }
                     <p>{about}</p>
                    </div>
+                  
                 </div>
             );
         })}      

@@ -65,6 +65,9 @@ const NavBar = () => {
                 <Link to="/connections" className="text-base hover:bg-gray-700 py-3">Connections</Link>
               </li>
               <li>
+                <Link to="/requests" className="text-base hover:bg-gray-700 py-3">Requests</Link>
+              </li>
+              <li>
                 {/* Logout button styled for clear action */}
                 <a onClick={handleLogout} className="text-base text-red-400 font-semibold hover:bg-red-900/40 hover:text-red-300 py-3">
                   Logout 🚪

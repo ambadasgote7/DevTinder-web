@@ -12,7 +12,7 @@ const Login = () => {
     const [error, setError] = useState("");
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
+  
     const handleLogin = async () => {
         try {
             const res = await axios.post(BASE_URL + "/login" , {
@@ -23,7 +23,6 @@ const Login = () => {
             return navigate('/');
         } catch (err) {
           setError(err?.response?.data || "Something went wrong");
-          console.log(err);
         }
     }
 

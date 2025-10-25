@@ -1,5 +1,24 @@
+import axios from "axios";
+import { BASE_URL } from "../utils/constants";
+import { useDispatch } from "react-redux";
+import { removeUserFromFeed } from "../utils/feedSlice";
+
 const UserCard = ({ user }) => {
-    const {firstName, lastName, photoUrl, age, gender, about } = user;
+    const {_id, firstName, lastName, photoUrl, age, gender, about } = user;
+    const dispatch = useDispatch();
+
+    const handleRequest = async (status, userId) => {
+        try {
+            const res = await axios.post(BASE_URL + "/request/send/" + status + "/" + userId, 
+                {},
+                { withCredentials : true },
+            );
+            dispatch(removeUserFromFeed(userId));
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     return (
         <div className="flex items-center justify-center p-4">
             <div className="card bg-base-100 w-96 shadow-2xl hover:shadow-3xl transition-shadow duration-300 overflow-hidden">
@@ -23,10 +42,10 @@ const UserCard = ({ user }) => {
                         {about}
                     </p>
                     <div className="card-actions justify-center gap-4 mt-4">
-                        <button className="btn btn-primary btn-lg flex-1 hover:scale-105 transition-transform">
+                        <button className="btn btn-primary btn-lg flex-1 hover:scale-105 transition-transform" onClick={() => handleRequest ("interested",_id)}>
                             ❤️ Interested
                         </button>
-                        <button className="btn btn-ghost btn-lg flex-1 hover:scale-105 transition-transform">
+                        <button className="btn btn-ghost btn-lg flex-1 hover:scale-105 transition-transform" onClick={() => handleRequest ("ignored",_id)}>
                             ✕ Ignore
                         </button>
                     </div>
